@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<EmployeeManagementSystem.Models.Employee>
+
+<h2>Employee List</h2>
+
+<a class="btn btn-primary mb-3" href="/Employees/Create">Add New Employee</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Position</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.Id</td>
+                <td>@e.FullName</td>
+                <td>@e.Position</td>
+                <td>@e.Department</td>
+                <td>@e.Salary</td>
+                <td>
+                    <a href="/Employees/Edit/@e.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/Employees/Delete/@e.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
