@@ -12,11 +12,28 @@ namespace EmployeeManagementSystem.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var employees = _context.Employees.ToList();
-            return View(employees);
+            var employees = _context.Employees.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                employees = employees.Where(e =>
+                    e.FullName.Contains(search) ||
+                    e.Department.Contains(search) ||
+                    e.Position.Contains(search)
+                );
+            }
+
+            return View(employees.ToList());
         }
+
+        //public IActionResult Index()
+        //{
+        //    var employees = _context.Employees.ToList();
+        //    return View(employees);
+        //}
+
         // GET: /Employees/Create
         public IActionResult Create()
         {
